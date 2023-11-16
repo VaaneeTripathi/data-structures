@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     // Handle memory-allocation failure
     if (sampleArray == NULL)
     {
-        printf("Error: Memory allocation failed");
+        perror("Memory allocation failed");
         exit(1);
     }
 
@@ -79,9 +79,11 @@ int main(int argc, char *argv[])
     // Call linearSearch
     int resultOfSearch = linearSearch(sampleArray, numberToBeSearched, numberOfElements);
 
+    // perror prints error messages
     if (resultOfSearch == 0)
     {
-        printf("Empty Array!");
+        perror("Empty Array. Cannot perform search operation");
+        exit(1);
     }
     if (resultOfSearch == 1)
     {
