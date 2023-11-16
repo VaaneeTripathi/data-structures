@@ -41,6 +41,13 @@ int main(int argc, char *argv[])
     // Initialize numberOfElements and allocate memory for sampleArray
     int numberOfElements = 10;
     int *sampleArray = (int *)malloc(numberOfElements * sizeof(int));
+    
+    // Handle memory-allocation failure
+    if (sampleArray == NULL)
+    {
+        printf("Error: Memory allocation failed");
+        exit(1);
+    }
 
     // Store user-entered seed in a variable seed and set some contsants for random number generation
     int seed = atoi(argv[1]);
