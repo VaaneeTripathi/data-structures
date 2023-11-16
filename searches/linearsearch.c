@@ -33,10 +33,12 @@ int main(int argc, char *argv[])
     int numberOfElements = 10;
     int *sampleArray = (int *)malloc(numberOfElements * sizeof(int));
     int seed = atoi(argv[1]);
+    int a = 32;
+    int c = 19;
 
     for (int itr = 0; itr < numberOfElements; itr++)
     {
-        sampleArray[itr] = 3*(seed/2) + 5;
+        sampleArray[itr] = (a*seed + c) % 100;
         seed = seed + seed/2;
     }
 
