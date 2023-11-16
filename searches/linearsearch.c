@@ -22,12 +22,17 @@ int linearSearch(int *arrayToBeSearched, int elementToBeFound, int lengthOfArray
     return -1;
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
+    if (argc != 2)
+    {
+        printf("The program requires a seed to proceed further.\nRequired Usage: %s <seed>\n", argv[0]);
+        exit(1);
+    }
     // Initialize an integer array
     int numberOfElements = 10;
     int *sampleArray = (int *)malloc(numberOfElements * sizeof(int));
-    int seed = 5;
+    int seed = atoi(argv[1]);
 
     for (int itr = 0; itr < numberOfElements; itr++)
     {
@@ -47,7 +52,7 @@ int main(void)
     int numberToBeSearched;
     printf("Number to search for: ");
     scanf("%d", &numberToBeSearched);
-    printf("\n");
+
 
     // Call linearSearch
     int resultOfSearch = linearSearch(sampleArray, numberToBeSearched, numberOfElements);
@@ -67,3 +72,5 @@ int main(void)
 
 
 }
+// TODO: print errors (error handling)
+// TODO: deal with memory allocation failure 
