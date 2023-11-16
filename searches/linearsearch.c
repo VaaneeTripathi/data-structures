@@ -96,5 +96,4 @@ int main(int argc, char *argv[])
 
 
 }
-// TODO: print errors (error handling)
-// TODO: deal with memory allocation failure 
+
