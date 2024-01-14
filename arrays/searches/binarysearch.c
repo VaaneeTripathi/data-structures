@@ -1,34 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
-// Objective: perform binary search on a sorted array to find a given element
+// Objective - perform binary search on a sorted array to find a given element
  
 int binarySearch(int *arrayToBeSearched, int lowerEnd, int higherEnd, int elementToBeFound)
 {
-    // Find the middle element
+    // Check if search range is valid
     if (lowerEnd <= higherEnd)
     {
-    int middleOftheArray = (lowerEnd + higherEnd)/2;
-    int middleElement = arrayToBeSearched[middleOftheArray];
+        // Find the middle element
+        int middleOftheArray = (lowerEnd + higherEnd)/2;
+        int middleElement = arrayToBeSearched[middleOftheArray];
 
-    // Check if middleElement is equal to elementToBeFound
-    if (middleElement == elementToBeFound)
-    {
-        return 1;
-    }
-
-    else
-    {
-        if (elementToBeFound < middleElement)
+        // Check if middleElement is equal to elementToBeFound
+        if (middleElement == elementToBeFound)
         {
-            return binarySearch(arrayToBeSearched, lowerEnd, middleOftheArray - 1, elementToBeFound);
+            return 0;
         }
 
-        if (elementToBeFound > middleElement)
+        // If not, compare
+        else
         {
-            return binarySearch(arrayToBeSearched, middleOftheArray + 1, higherEnd, elementToBeFound);
-        }
+            if (elementToBeFound < middleElement)
+            {
+                // Call the function on the left half 
+                return binarySearch(arrayToBeSearched, lowerEnd, middleOftheArray - 1, elementToBeFound);
+            }
 
-    }
+            if (elementToBeFound > middleElement)
+            {
+                // Call the function on the right half
+                return binarySearch(arrayToBeSearched, middleOftheArray + 1, higherEnd, elementToBeFound);
+            }
+
+        }
     
     }
 
@@ -36,31 +40,54 @@ int binarySearch(int *arrayToBeSearched, int lowerEnd, int higherEnd, int elemen
     
 }
 
-
-int main(void)
+// The arguments to this function are so, so that we can use command-line arguments to run the file
+int main(int argc, char *argv[])
 {
- int lengthOfTheArray = 15;
+    // Check if the required arguments are there, if not exit
+    // Exit status 1 - unsuccessful termination
+    if (argc != 3)
+    {
+        printf("The program requires more arguments to proceed further.\nRequired Usage: %s <length of the array> <multiplication factor>\n", argv[0]);
+        exit(1);
+    }
 
- int *arr = (int *)malloc(lengthOfTheArray*sizeof(int));
- for (int i = 0; i < lengthOfTheArray; i++)
- {
-    arr[i] = 2*i;
- }
+    // Convert the user input from string to integers and store them in variables
+    int lengthOfTheArray = atoi(argv[1]);
+    int factor = atoi(argv[2]);
 
- int elementToBeFound = 9;
+    // Allocate memory
+    int *arr = (int *)malloc(lengthOfTheArray*sizeof(int));
 
- int result = binarySearch(arr, 0, lengthOfTheArray - 1, elementToBeFound);
- if (result == 1)
- {
-    printf("yay!\n");
- }
+    // Handle memory-allocation failure
+    if (arr == NULL)
+    {
+        perror("Memory allocation failed");
+        exit(1);
+    }
 
- else
- {
-    printf("nay!\n");
- }
+    // Initialize a sorted array
+    for (int i = 0; i < lengthOfTheArray; i++)
+    {
+        arr[i] = factor*i;
+    }
 
- free(arr);
- return 0;
+    int elementToBeFound;
+    printf("Enter the number you wish to search for: ");
+    scanf("%d", &elementToBeFound);
+
+    int resultOfSearch = binarySearch(arr, 0, lengthOfTheArray - 1, elementToBeFound);
+    if (resultOfSearch == 0)
+    {
+        printf("Number found!\n");
+    }
+
+    else
+    {
+        printf("Number not found :(\n");
+    }
+
+    // Free allocated memory
+    free(arr);
+    return 0;
 
 }
