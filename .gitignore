@@ -1,2 +1,4 @@
 .vscode
 bin
+arrays/searches/binarysearch
+arrays/searches/linearsearch
