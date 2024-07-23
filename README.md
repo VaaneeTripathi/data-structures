@@ -25,7 +25,7 @@ git clone https://github.com/yourusername/data-structures-and-algorithms-repo.gi
 ## Usage
 Navigate to the specific language folder and run the code examples:
 ```
-cd src/python/data_structures
+cd src/python/<directory_name>
 python3 arrays.py
 ```
 
